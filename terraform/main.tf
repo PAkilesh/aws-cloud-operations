@@ -8,8 +8,9 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-south-1"
+  region = var.aws_region
 }
+
 resource "aws_s3_bucket" "cloud_operations" {
-  bucket = "akhilesh-cloud-operations-2026-653858193267"
+  bucket = var.bucket_name
 }
