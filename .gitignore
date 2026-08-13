@@ -32,3 +32,6 @@ config
 # OS files
 Thumbs.db
 .DS_Store
+# Terraform plan files
+*.tfplan
+tfplan
