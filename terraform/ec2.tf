@@ -1,6 +1,6 @@
 resource "aws_instance" "web" {
-  ami           = "ami-07e5ce642bbc48c0d"
-  instance_type = "t3.micro"
+  ami           = var.ami_id
+  instance_type = var.instance_type
   key_name      = "aws-cloud-operations-key"
 
   subnet_id                   = aws_subnet.public.id
@@ -8,13 +8,13 @@ resource "aws_instance" "web" {
   associate_public_ip_address = true
 
   root_block_device {
-    volume_size = 20
+    volume_size = var.root_volume_size
     volume_type = "gp3"
   }
 
   tags = {
-    Name        = "aws-cloud-operations-web-server"
-    Environment = "dev"
+    Name        = "${var.project_name}-web-server"
+    Environment = var.environment
     ManagedBy   = "Terraform"
   }
 }

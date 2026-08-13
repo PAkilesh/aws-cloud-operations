@@ -1,5 +1,5 @@
 resource "aws_security_group" "web" {
-  name        = "aws-cloud-operations-web-sg"
+  name        = "${var.project_name}-web-sg"
   description = "Security group for web server"
   vpc_id      = aws_vpc.main.id
 
@@ -16,7 +16,7 @@ resource "aws_security_group" "web" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["49.206.26.45/32"]
+    cidr_blocks = [var.ssh_allowed_cidr]
   }
 
   egress {
@@ -28,8 +28,8 @@ resource "aws_security_group" "web" {
   }
 
   tags = {
-    Name        = "aws-cloud-operations-web-sg"
-    Environment = "dev"
+    Name        = "${var.project_name}-web-sg"
+    Environment = var.environment
     ManagedBy   = "Terraform"
   }
 }
