@@ -12,6 +12,9 @@ resource "aws_instance" "web" {
     volume_type = "gp3"
   }
 
+  # Recreate the EC2 instance whenever user_data changes
+  user_data_replace_on_change = true
+
   user_data = <<-EOF
               #!/bin/bash
 
@@ -35,6 +38,8 @@ resource "aws_instance" "web" {
               </body>
               </html>
               HTML
+
+              systemctl restart nginx
               EOF
 
   tags = {
